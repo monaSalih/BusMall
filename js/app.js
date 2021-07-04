@@ -13,7 +13,7 @@ let butResult = document.getElementById('result');
 //////////////////constructor
 let busMallIimg = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'];
 let mallProduct = []
-let maxEtration = 15;
+let maxEtration = 25;
 let minEtration = 0;
 
 function BusMallCons(proName) {
@@ -118,18 +118,21 @@ alert('yoy are finish your Etiration click on button to see the rsult')
     imageRender()
 }
 // calcutClickSh();
-divConta.addEventListener('click',seeRsult)
-function seeRsult(){
+
+butResult.addEventListener('click',show_ul)
+let btnResul;
+function show_ul(){
+    
     for (let r = 0; r < mallProduct.length; r++) {
         let liResult = document.createElement('li');
         liResult.textContent = `${(mallProduct[r].productName)[0]} had clicked:${mallProduct[r].imageClick}, and was seen ${mallProduct[r].imageShow} times`;
         ulResult.appendChild(liResult);
+   
+
     }
-
-
 }
 
-
+// show_ul()
 
 //     for (let i = 0; i < 25; i++) { 
 //     if (imageL === imageR && imageL === imageC) {
