@@ -7,7 +7,7 @@ let rigEle = document.getElementById('image3')
 let ulResult = document.getElementById('ulContan');
 let butResult = document.getElementById('result');
 
-
+let produChar=[]
 
 
 //////////////////constructor
@@ -24,6 +24,7 @@ function BusMallCons(proName) {
     // this.proClick = itemClick;
     // this.
     mallProduct.push(this)
+    produChar.push(this.productName)
 
 }
 
@@ -130,6 +131,7 @@ function show_ul(){
    
 
     }
+    butResult.removeEventListener('click', show_ul)
 }
 
 // show_ul()
