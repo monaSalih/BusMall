@@ -7,24 +7,26 @@ let rigEle = document.getElementById('image3')
 let ulResult = document.getElementById('ulContan');
 let butResult = document.getElementById('result');
 
-let produChar=[]
-
-
 //////////////////constructor
 let busMallIimg = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'];
 let mallProduct = []
 let maxEtration = 25;
 let minEtration = 0;
 
+let imageArray = []
+let produChar = []
+let imageVeiw = [];
+let imageChose = []
+
 function BusMallCons(proName) {
-    this.productName = proName.split('.'[0]);
+    this.productName = proName.split('.');
     this.imageBath = `busImags/` + proName;
     this.imageShow = 0;
     this.imageClick = 0;
     // this.proClick = itemClick;
     // this.
     mallProduct.push(this)
-    produChar.push(this.productName)
+    produChar.push(this.productName[0])
 
 }
 
@@ -34,7 +36,7 @@ function randomProduct() {
 
 }
 
-console.log('all product',mallProduct);
+console.log('all product', mallProduct);
 ///newObject
 for (let i = 0; i < busMallIimg.length; i++) {
     new BusMallCons(busMallIimg[i])
@@ -47,17 +49,22 @@ let imageL;
 let imageR;
 let imageC;
 function imageRender() {
-    imageL = randomProduct();
-    imageR = randomProduct();
-    imageC = randomProduct();
-
-    while (imageL === imageR || imageL === imageC || imageC === imageR || imageL === imageC) {
+    // imageL = randomProduct();
+    // imageR = randomProduct();
+    // imageC = randomProduct();
+    do {
         imageL = randomProduct();
         imageC = randomProduct();
         imageR = randomProduct();
+         
+        
+    } while (imageL === imageR || imageL === imageC || imageC === imageR || imageL === imageC ||imageArray.includes(imageL)||imageArray.includes(imageC)|| imageArray.includes(imageR));
 
+    // while  {
+    // }
+        imageArray=[imageL,imageC,imageR]
+        // imageArray.push(imageL,imageC,imageR)
 
-    }
 
 
     /////setAtrribute
@@ -76,6 +83,7 @@ function imageRender() {
     mallProduct[imageL].imageShow++;
     mallProduct[imageC].imageShow++;
     mallProduct[imageR].imageShow++;
+
 
 }
 
@@ -108,8 +116,8 @@ function calcutClickSh(event) {
         }
 
     } else {
-alert('yoy are finish your Etiration click on button to see the rsult')
-        
+        alert('yoy are finish your Etiration click on button to see the rsult')
+
         leftEle.removeEventListener('click', calcutClickSh)
         cenEle.removeEventListener('click', calcutClickSh)
         rigEle.removeEventListener('click', calcutClickSh)
@@ -117,23 +125,71 @@ alert('yoy are finish your Etiration click on button to see the rsult')
     minEtration++;
     console.log(mallProduct);
     imageRender()
+    // callChart() 
 }
 // calcutClickSh();
 
-butResult.addEventListener('click',show_ul)
+
+//////////////chartFunction
+
+function callChart() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: produChar,
+            datasets: [{
+                label: '# of clicks',
+                data: imageVeiw,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }, {
+                label: '# of view',
+                data: imageChose,
+                backgroundColor: [
+                    '#C6B4CE',
+                ],
+                borderColor: [
+                    '#BB8760',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+}
+
+
+
+//////////////chartFunction
+butResult.addEventListener('click', show_ul)
 let btnResul;
-function show_ul(){
-    
+function show_ul() {
+
     for (let r = 0; r < mallProduct.length; r++) {
         let liResult = document.createElement('li');
         liResult.textContent = `${(mallProduct[r].productName)[0]} had clicked:${mallProduct[r].imageClick}, and was seen ${mallProduct[r].imageShow} times`;
         ulResult.appendChild(liResult);
-   
+        imageVeiw.push(mallProduct[r].imageShow);
+        imageChose.push(mallProduct[r].imageClick)
+        console.log(imageChose[r], 'array');
 
     }
     butResult.removeEventListener('click', show_ul)
+    callChart()
 }
-
 // show_ul()
 
 //     for (let i = 0; i < 25; i++) { 

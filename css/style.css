@@ -6,3 +6,7 @@ img{
     /* div{
         display: inline;
     } */
+    canvas{
+        width: 300px;
+        height: 200px;
+    }
