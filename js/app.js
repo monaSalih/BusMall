@@ -172,7 +172,6 @@ function callChart() {
 }
 
 
-
 //////////////chartFunction
 butResult.addEventListener('click', show_ul)
 let btnResul;
