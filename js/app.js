@@ -220,12 +220,12 @@ function show_ul() {
 }
 
 /////////////////////clear Button
-let clearButton=document.getElementById('clear')
-clearButton.addEventListener('click',clearLStorage)
-function clearLStorage(){
-    localStorage.clear();
+// let clearButton=document.getElementById('clear')
+// clearButton.addEventListener('click',clearLStorage)
+// function clearLStorage(){
+//     localStorage.clear();
   
-}
+// }
 
 
 
