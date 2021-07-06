@@ -219,13 +219,13 @@ function show_ul() {
     callChart()
 }
 
-/////////////////////clear Button
-let clearButton=document.getElementById('clear')
-clearButton.addEventListener('click',clearLStorage)
-function clearLStorage(){
-    localStorage.clear();
+/////////////////////clear Button 
+// let clearButton=document.getElementById('clear')
+// clearButton.addEventListener('click',clearLStorage)
+// function clearLStorage(){
+//     localStorage.clear();
   
-}
+// }
 
 
 
