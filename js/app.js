@@ -10,13 +10,15 @@ let butResult = document.getElementById('result');
 //////////////////constructor
 let busMallIimg = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'water-can.jpg', 'wine-glass.jpg'];
 let mallProduct = []
-let maxEtration = 25;
+let maxEtration = 5;
 let minEtration = 0;
 
 let imageArray = []
 let produChar = []
 let imageVeiw = [];
-let imageChose = []
+let imageChose = [];
+// let voteNumber=[];
+// let clickNumber=[]
 
 function BusMallCons(proName) {
     this.productName = proName.split('.');
@@ -83,13 +85,13 @@ function imageRender() {
     mallProduct[imageL].imageShow++;
     mallProduct[imageC].imageShow++;
     mallProduct[imageR].imageShow++;
-
+   
 
 }
 
 // randomProduct()
 imageRender()
-
+readStorageItem()
 ////html debug
 let result = 0
 leftEle.addEventListener('click', calcutClickSh)
@@ -125,9 +127,36 @@ function calcutClickSh(event) {
     minEtration++;
     console.log(mallProduct);
     imageRender()
+    storageItem();
     // callChart() 
 }
 // calcutClickSh();
+//////////////local Storage
+function storageItem(){
+    let itemProduct=JSON.stringify(mallProduct);
+    console.log(itemProduct,'string');
+    localStorage.setItem('productMall',itemProduct)
+
+}
+// storageItem();
+function readStorageItem(){
+    let itemStore=localStorage.getItem('productMall')
+    // console.log(productMall,'store');
+    let objectStore=JSON.parse(itemStore)
+
+    // if(objectStore){
+    //         produChar=objectStore;
+    //         imageRender()
+    //         }
+    if (objectStore!==null){
+        mallProduct=objectStore;
+
+    }
+    // imageRender()
+ }
+ readStorageItem()
+
+          
 
 
 //////////////chartFunction
@@ -139,7 +168,7 @@ function callChart() {
         data: {
             labels: produChar,
             datasets: [{
-                label: '# of clicks',
+                label:  '# of view',
                 data: imageVeiw,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -149,7 +178,7 @@ function callChart() {
                 ],
                 borderWidth: 1
             }, {
-                label: '# of view',
+                label:'# of clicks',
                 data: imageChose,
                 backgroundColor: [
                     '#C6B4CE',
@@ -189,6 +218,17 @@ function show_ul() {
     butResult.removeEventListener('click', show_ul)
     callChart()
 }
+
+/////////////////////clear Button
+let clearButton=document.getElementById('clear')
+clearButton.addEventListener('click',clearLStorage)
+function clearLStorage(){
+    localStorage.clear();
+  
+}
+
+
+
 // show_ul()
 
 //     for (let i = 0; i < 25; i++) { 
